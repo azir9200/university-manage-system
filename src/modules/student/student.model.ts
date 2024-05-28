@@ -1,8 +1,9 @@
 import { model, Schema } from 'mongoose';
-import { Guardian, LocalGuardian, Student, UserName } from './student.interface';
+import { TGuardian, TLocalGuardian, TStudent, TUserName } from './student.interface';
+import bcrypt from 'bcrypt';
+import config from '../../config';
 
-
-const userNameSchema = new Schema<UserName>({
+const userNameSchema = new Schema<TUserName>({
   firstName: {
     type: String,
     required: true,
@@ -16,7 +17,7 @@ const userNameSchema = new Schema<UserName>({
   },
 });
 
-const guardianSchema = new Schema<Guardian>({
+const guardianSchema = new Schema<TGuardian>({
   fatherName: {
     type: String,
     required: true,
@@ -43,7 +44,7 @@ const guardianSchema = new Schema<Guardian>({
   },
 });
 
-const localGuradianSchema = new Schema<LocalGuardian>({
+const localGuardianSchema = new Schema<TLocalGuardian>({
   name: {
     type: String,
     required: true,
@@ -62,21 +63,56 @@ const localGuradianSchema = new Schema<LocalGuardian>({
   },
 });
 
-const studentSchema = new Schema<Student>({
-  id: { type: String },
+
+
+const studentSchema = new Schema<TStudent>({
+  id: { type: String, required: [true, 'ID is required']},
+  password: {type: String, required: [true, 'Password is required '], maxLength: [20, 'Password can not be more than 20 characters.']},
   name: userNameSchema,
-  gender: ['male', 'female'],
+  gender: ['male', 'female', 'others'],
   dateOfBirth: { type: String },
-  email: { type: String, required: true },
+  email: { type: String},
   contactNo: { type: String, required: true },
-  emergencyContactNo: { type: String, required: true },
+  emergencyContactNo: { type: String},
   bloodGroup: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
   presentAddress: { type: String, required: true },
   permanentAddress: { type: String, required: true },
   guardian: guardianSchema,
-  localGuardian: localGuradianSchema,
+  localGuardian: localGuardianSchema,
   profileImg: { type: String },
-  isActive: ['active', 'blocked'],
+  isActive: {
+    type: String,
+    enum: {
+      values: ['active', 'blocked'],
+      message: '{Value}  is not a valid status',
+    },
+    default: 'active',
+  },
+  isDeleted: {
+    type: Boolean,
+    default: false,
+  }
 });
+// PRE hook  middleware then post
+studentSchema.pre('save', async function(next){
+  // console.log(this, 'pre hook: we will save data !')
+const user = this
+ user.password  = await bcrypt.hash(user.password, Number(config.bcrypt_salt_rounds))
+ next();
+})
 
-export const StudentModel = model<Student>('Student', studentSchema);
+
+studentSchema.post('save', function(doc,next){
+  doc.password = "";
+  next();
+  // console.log( 'post hook: our data is already saved !')
+})
+// Query middleware for delete a data; 
+
+studentSchema.pre('find', function (next){
+  console.log(this);
+  // this.find({isDeleted: {$ne:true}})
+  // next();
+})
+
+export const StudentModel = model<TStudent>('Student', studentSchema);
