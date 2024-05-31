@@ -1,3 +1,5 @@
+import { Model, Types } from "mongoose";
+
 export type TUserName = {
     firstName: string;
     middleName?: string;
@@ -22,6 +24,7 @@ export type TUserName = {
   
   export type TStudent = {
     id: string;
+    user: Types.ObjectId,
     password : string;
     name: TUserName;
     gender: 'male' | 'female' | 'other';
@@ -35,6 +38,10 @@ export type TUserName = {
     guardian: TGuardian;
     localGuardian: TLocalGuardian;
     profileImg: string;
-    isActive: 'active' | 'blocked';
+    // isActive: 'active' | 'blocked';
     isDeleted: boolean;
   };
+
+  // export interface StudentModel extends Model<TStudent>{
+
+  // }
