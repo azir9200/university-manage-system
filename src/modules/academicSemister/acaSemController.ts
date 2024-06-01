@@ -9,7 +9,7 @@ const result = await AcademicSemesterServices.createAcademicSemesterIntoDB(req.b
     sendResponse(res, {
         statusCode: httpStatus.OK,
         success: true,
-        message: 'Student Semester is created by Azir',
+        message: 'Academic Semester is created by Azir',
         data: result,
     });
 });
