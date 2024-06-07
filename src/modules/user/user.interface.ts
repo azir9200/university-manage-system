@@ -8,7 +8,7 @@ export type TRUserName = {
 
 
 export type TUser = {
-    name: TRUserName,
+    
     id: string,
     password: string;
     needsPasswordChange: boolean;

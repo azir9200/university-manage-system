@@ -19,10 +19,11 @@ const userNameRSchema = new Schema<TRUserName>({
   });
 
 const userSchema = new Schema<TUser>({
-    name: userNameRSchema,
+    
     id: {
         type: String,
         required: true,
+        unique: true,
     },
     password:  {
         type: String,
@@ -39,6 +40,7 @@ const userSchema = new Schema<TUser>({
     status: {
         type: String,
         enum: ['in-progress', 'blocked'],
+        default: 'in-progress',
     },
     isDeleted: {
         type: Boolean,
@@ -53,9 +55,9 @@ const userSchema = new Schema<TUser>({
 userSchema.pre('save', async function(next){
     // console.log(this, 'pre hook: we will save data !')
   const user = this
-   user.password  = await bcrypt.hash(user.password, Number(config.bcrypt_salt_rounds))
+   user.password  = await bcrypt.hash(user.password, Number(config.bcrypt_salt_rounds),);
    next();
-  })
+  });
   
   
   userSchema.post('save', function(doc,next){

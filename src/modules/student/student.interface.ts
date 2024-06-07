@@ -28,7 +28,7 @@ export type TUserName = {
     password : string;
     name: TUserName;
     gender: 'male' | 'female' | 'other';
-    dateOfBirth: Date;
+    dateOfBirth: String;
     email: string;
     contactNo: string;
     emergencyContactNo: string;
@@ -38,7 +38,7 @@ export type TUserName = {
     guardian: TGuardian;
     localGuardian: TLocalGuardian;
     profileImg: string;
-    // isActive: 'active' | 'blocked';
+    admissionSemester: Types.ObjectId,
     isDeleted: boolean;
   };
 
