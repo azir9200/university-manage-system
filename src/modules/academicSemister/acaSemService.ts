@@ -1,3 +1,5 @@
+import httpStatus from "http-status";
+import AppError from "../../app/errors/App.Error";
 import { academicSemesterNameCodeMapper } from "./academSem.const";
 import { TAcademicSemester,  } from "./academSemi.interface";
 import { AcademicSemester } from "./academSemi.model";
@@ -5,7 +7,8 @@ import { AcademicSemester } from "./academSemi.model";
 const createAcademicSemesterIntoDB = async (payLoad: TAcademicSemester) =>{
 
 if(academicSemesterNameCodeMapper[payLoad.name] !== payLoad.code){
-   throw new Error('Invalid Semester Code')
+   //throw new Error('Invalid Semester Code')
+   throw new AppError(httpStatus.NOT_FOUND,'This department does not exist! ', );
 }
    const result = await AcademicSemester.create(payLoad);
 return result;
@@ -30,7 +33,8 @@ const getAllAcademicSemestersFromDB = async () => {
      payload.code &&
      academicSemesterNameCodeMapper[payload.name] !== payload.code
    ) {
-     throw new Error('Invalid Semester Code');
+     
+     throw new AppError(httpStatus.NOT_FOUND,'This department does not exist! ', );
    }
     const result = await AcademicSemester.findOneAndUpdate({ _id: id }, payload, {
      new: true,

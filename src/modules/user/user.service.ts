@@ -9,12 +9,13 @@ import { Student,  } from "../student/student.model";
 import { User } from "./user.model";
 import { generateStudentId } from "./user.utils";
 import { TUser } from "./user.interface";
+import AppError from "../../app/errors/App.Error";
+import httpStatus from "http-status";
 
 
 const createStudentIntoDB = async (password: string, payload: TStudent) => {
 
-    const userData: Partial<TUser > = {
-      
+    const userData: Partial<TUser > = {    
     };
     
     userData.password = password || (config.default_password as string);
@@ -24,7 +25,13 @@ const createStudentIntoDB = async (password: string, payload: TStudent) => {
 
  const admissionSemester = await AcademicSemester.findById(payload.admissionSemester,);
  if(!admissionSemester){
-  throw new Error('Admission  semester is not correct ! ')
+  
+  throw new AppError(httpStatus.NOT_FOUND,'Admission  semester is not correct !  ', );
+ }
+
+ try{} 
+ catch(err){
+
  }
   //set  generated id
 userData.id = await generateStudentId(admissionSemester);

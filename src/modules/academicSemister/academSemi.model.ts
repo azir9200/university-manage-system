@@ -2,6 +2,8 @@ import { model, Schema } from "mongoose";
 // import { TAcademicSemester, TAcademicSemesterCode, TAcademicSemesterName, TMonths } from "./academSemi.interface";
 import { AcademicSemesterCode, AcademicSemesterName, months } from "./academSem.const";
 import { TAcademicSemester } from "./academSemi.interface";
+import AppError from "../../app/errors/App.Error";
+import httpStatus from "http-status";
 
   
 
@@ -34,7 +36,8 @@ academicSemesterSchema.pre('save', async function (next){
       })
       
       if(isSemesterExists){
-        throw new Error('Semester is already exists !')
+        //throw new Error('Semester is already exists !')
+        throw new AppError(httpStatus.NOT_FOUND,'This department does not exist! ', );
       }
       next();
 })
