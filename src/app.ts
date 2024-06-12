@@ -5,6 +5,7 @@ import { UserRoutes } from './modules/user/user.route';
 import globalErrorHandler from './app/middlewares/globalError';
 import notFound from './app/middlewares/notFoundRoute';
 import router from './app/routes';
+import { promise } from 'zod';
 
 
 const app: Application = express();
@@ -16,14 +17,14 @@ app.use(cors());
 // application routes
 app.use('/api/v1/', router);
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello Next!");
+const test =  (req: Request, res: Response) => {
+  Promise.reject()
 
   const a = 11;
   res.send(a);
   console.log('hello testing !')
-});
-
+};
+app.get('/', test)
 app.use(globalErrorHandler);
 app.use(notFound);
 export default app;
