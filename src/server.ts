@@ -2,6 +2,7 @@ import { object } from "zod";
 import app from "./app";
 import config from "./config";
 import mongoose from "mongoose";
+import { Server } from "http";
 
 let server: Server;
 

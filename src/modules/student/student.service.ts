@@ -1,23 +1,43 @@
+import QueryBuilder from '../../app/builder/QueryBuilder';
 import { TStudent } from './student.interface';
 import { Student } from './student.model';
+import { studentSearchableFields } from './studentConstant';
 
-const createStudentIntoDB = async (student: TStudent) => {
-  const result = await Student.create(student);
-  return result;
-};
+// const createStudentIntoDB = async (student: TStudent) => {
+//   const result = await Student.create(student);
+//   return result;
+// };
 
-const getAllStudentsFromDB = async () => {
-  //const result = await Student.find();
-  const result = await Student.find()
-  .populate('admissionSemester')
-  .populate({
-    path: 'academicDepartment',
-    populate: {
-      path: 'academicFaculty',
-    },
-  });
+const getAllStudentsFromDB = async (query: Record<string, unknown>) => {
+//    const result = await Student.find()
+//   .populate('admissionSemester')
+//   .populate({
+//     path: 'academicDepartment',
+//     populate: {
+//       path: 'academicFaculty',
+//     },
+//   });
   
-  return result;
+//   return result;
+// };
+const studentQuery = new QueryBuilder(
+  Student.find()
+    .populate('admissionSemester')
+    .populate({
+      path: 'academicDepartment',
+      populate: {
+        path: 'academicFaculty',
+      },
+    }),query,
+)
+  .search(studentSearchableFields)
+  .filter()
+  .sort()
+  .paginate()
+  .fields();
+
+const result = await studentQuery.modelQuery;
+return result;
 };
 
 const getSingleStudentFromDB = async (id: string) => {
@@ -40,8 +60,7 @@ const deleteStudentFromDB = async (id: string) => {
 };
 
 export const StudentServices = {
-  createStudentIntoDB,
-  getAllStudentsFromDB,
+   getAllStudentsFromDB,
   getSingleStudentFromDB,
   deleteStudentFromDB,
 };
