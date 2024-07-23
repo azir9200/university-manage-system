@@ -1,13 +1,3 @@
-// /* eslint-disable @typescript-eslint/no-explicit-any */
-// import httpStatus from 'http-status';
-// import mongoose from 'mongoose';
-// import QueryBuilder from '../../builder/QueryBuilder';
-// import AppError from '../../errors/AppError';
-// import { User } from '../user/user.model';
-// import { AdminSearchableFields } from './admin.constant';
-// import { TAdmin } from './admin.interface';
-// import { Admin } from './admin.model';
-
 import mongoose from "mongoose";
 import QueryBuilder from "../../app/builder/QueryBuilder";
 import { AdminSearchableFields } from "./constant.admin";

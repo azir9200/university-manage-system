@@ -1,7 +1,6 @@
-import QueryBuilder from '../../app/builder/QueryBuilder';
-import { TStudent } from './student.interface';
-import { Student } from './student.model';
-import { studentSearchableFields } from './studentConstant';
+import QueryBuilder from "../../app/builder/QueryBuilder";
+import { Student } from "./student.model";
+import { studentSearchableFields } from "./studentConstant";
 
 // const createStudentIntoDB = async (student: TStudent) => {
 //   const result = await Student.create(student);
@@ -9,58 +8,58 @@ import { studentSearchableFields } from './studentConstant';
 // };
 
 const getAllStudentsFromDB = async (query: Record<string, unknown>) => {
-//    const result = await Student.find()
-//   .populate('admissionSemester')
-//   .populate({
-//     path: 'academicDepartment',
-//     populate: {
-//       path: 'academicFaculty',
-//     },
-//   });
-  
-//   return result;
-// };
-const studentQuery = new QueryBuilder(
-  Student.find()
-    .populate('admissionSemester')
-    .populate({
-      path: 'academicDepartment',
-      populate: {
-        path: 'academicFaculty',
-      },
-    }),query,
-)
-  .search(studentSearchableFields)
-  .filter()
-  .sort()
-  .paginate()
-  .fields();
+  //    const result = await Student.find()
+  //   .populate('admissionSemester')
+  //   .populate({
+  //     path: 'academicDepartment',
+  //     populate: {
+  //       path: 'academicFaculty',
+  //     },
+  //   });
 
-const result = await studentQuery.modelQuery;
-return result;
+  //   return result;
+  // };
+  const studentQuery = new QueryBuilder(
+    Student.find()
+      .populate("admissionSemester")
+      .populate({
+        path: "academicDepartment",
+        populate: {
+          path: "academicFaculty",
+        },
+      }),
+    query
+  )
+    .search(studentSearchableFields)
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+
+  const result = await studentQuery.modelQuery;
+  return result;
 };
 
 const getSingleStudentFromDB = async (id: string) => {
- // const result = await Student.findOne({ id });
- const result = await Student.findOne({ id })
-    .populate('admissionSemester')
+  // const result = await Student.findOne({ id });
+  const result = await Student.findOne({ id })
+    .populate("admissionSemester")
     .populate({
-      path: 'academicDepartment',
+      path: "academicDepartment",
       populate: {
-        path: 'academicFaculty',
+        path: "academicFaculty",
       },
     });
   return result;
 };
 
-
 const deleteStudentFromDB = async (id: string) => {
-  const result = await Student.updateOne({id}, {isDeleted: true});
+  const result = await Student.updateOne({ id }, { isDeleted: true });
   return result;
 };
 
 export const StudentServices = {
-   getAllStudentsFromDB,
+  getAllStudentsFromDB,
   getSingleStudentFromDB,
   deleteStudentFromDB,
 };
