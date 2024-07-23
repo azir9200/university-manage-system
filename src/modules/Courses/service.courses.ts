@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import QueryBuilder from "../../app/builder/QueryBuilder";
 import { CourseSearchableFields } from "./contant.courses";
-import { TCourse, TCoursefaculty } from "./interface.courses";
+import { TCourse, TCourseFaculty } from "./interface.courses";
 import { Course, CourseFaculty } from "./model.courses";
 import AppError from "../../app/errors/App.Error";
 import httpStatus from "http-status";
@@ -131,7 +131,7 @@ const deleteCourseFromDB = async (id: string) => {
 
 const assignFacultiesWithCourseIntoDB = async (
   id: string,
-  payload: Partial<TCoursefaculty>
+  payload: Partial<TCourseFaculty>
 ) => {
   const result = await CourseFaculty.findByIdAndUpdate(
     id,
@@ -149,7 +149,7 @@ const assignFacultiesWithCourseIntoDB = async (
 
 const removeFacultiesFromCourseFromDB = async (
   id: string,
-  payload: Partial<TCoursefaculty>
+  payload: Partial<TCourseFaculty>
 ) => {
   const result = await CourseFaculty.findByIdAndUpdate(
     id,
@@ -168,4 +168,7 @@ export const CourseServices = {
   getAllCoursesFromDB,
   getSingleCourseFromDB,
   deleteCourseFromDB,
+  updateCourseIntoDB,
+  assignFacultiesWithCourseIntoDB,
+  removeFacultiesFromCourseFromDB,
 };
