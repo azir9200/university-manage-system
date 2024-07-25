@@ -16,18 +16,18 @@ export type TUserName = {
   middleName: string;
   lastName: string;
 };
-
+  
 export type TAdmin = {
   id: string;
   user: Types.ObjectId;
-  designation: string;
+//  designation: string;
   name: TUserName;
   gender: TGender;
   dateOfBirth?: Date;
   email: string;
   contactNo: string;
   emergencyContactNo: string;
-  bloogGroup?: TBloodGroup;
+  bloodGroup?: TBloodGroup;
   presentAddress: string;
   permanentAddress: string;
   profileImg?: string;

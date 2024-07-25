@@ -34,10 +34,10 @@ const adminSchema = new Schema<TAdmin, AdminModel>(
       unique: true,
       ref: "User",
     },
-    designation: {
-      type: String,
-      required: [true, "Designation is required"],
-    },
+    // designation: {
+    //   type: String,
+    //   required: [true, "Designation is required"],
+    // },
     name: {
       type: userNameSchema,
       required: [true, "Name is required"],
@@ -61,7 +61,7 @@ const adminSchema = new Schema<TAdmin, AdminModel>(
       type: String,
       required: [true, "Emergency contact number is required"],
     },
-    bloogGroup: {
+    bloodGroup: {
       type: String,
       enum: {
         values: BloodGroup,
