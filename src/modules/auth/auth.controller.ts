@@ -1,4 +1,3 @@
-
 import httpStatus from "http-status";
 import catchAsync from "../../app/utils/catchAsync";
 import sendResponse from "../../app/utils/sendResponse";
@@ -10,7 +9,7 @@ const loginUser = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "User is logged in successfully!",
+    message: "Auth(user) login successfully !",
     data: result,
   });
 });

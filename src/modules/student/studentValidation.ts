@@ -1,4 +1,4 @@
-import { optional, z } from 'zod';
+import {  z } from 'zod';
 // import { Guardian, LocalGuardian, Student, UserName } from './student.interface';
 
 export const userNameValidationSchema = z.object({

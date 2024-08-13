@@ -1,4 +1,4 @@
-import { Date, Model, Types } from "mongoose";
+import {  Types } from "mongoose";
 
 export type TUserName = {
     firstName: string;
@@ -25,10 +25,9 @@ export type TUserName = {
   export type TStudent = {
     id: string;
     user: Types.ObjectId,
-    password : string;
     name: TUserName;
     gender: 'male' | 'female' | 'other';
-    dateOfBirth: String;
+    dateOfBirth: string;
     email: string;
     contactNo: string;
     emergencyContactNo: string;

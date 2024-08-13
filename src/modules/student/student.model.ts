@@ -1,6 +1,10 @@
-import { model, Schema } from 'mongoose';
-import { TGuardian, TLocalGuardian, TStudent, TUserName } from './student.interface';
-
+import { model, Schema } from "mongoose";
+import {
+  TGuardian,
+  TLocalGuardian,
+  TStudent,
+  TUserName,
+} from "./student.interface";
 
 const userNameSchema = new Schema<TUserName>({
   firstName: {
@@ -62,38 +66,36 @@ const localGuardianSchema = new Schema<TLocalGuardian>({
   },
 });
 
-
-
 const studentSchema = new Schema<TStudent>({
-  id: { type: String, required: [true, 'ID is required'], unique: true,},
+  id: { type: String, required: [true, "ID is required"], unique: true },
   user: {
     type: Schema.Types.ObjectId,
-    required: [true, 'Password is required '],unique: true,
-    ref: 'User',
+    required: [true, "Password is required "],
+    unique: true,
+    ref: "User",
   },
+
   name: userNameSchema,
-  gender: ['male', 'female', 'others'],
+  gender: ["male", "female", "others"],
   dateOfBirth: String,
-  email: { type: String},
+  email: { type: String },
   contactNo: { type: String, required: true },
-  emergencyContactNo: { type: String},
-  bloodGroup: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
+  emergencyContactNo: { type: String },
+  bloodGroup: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
   presentAddress: { type: String, required: true },
   permanentAddress: { type: String, required: true },
   guardian: guardianSchema,
   localGuardian: localGuardianSchema,
   profileImg: { type: String },
-  admissionSemester: {type: Schema.Types.ObjectId,
-    ref:'AcademicSemester',
-  },
+  admissionSemester: { type: Schema.Types.ObjectId, ref: "AcademicSemester" },
   isDeleted: {
     type: Boolean,
     default: false,
   },
   academicDepartment: {
     type: Schema.Types.ObjectId,
-    ref: 'AcademicDepartment',
+    ref: "AcademicDepartment",
   },
 });
 
-export const Student = model<TStudent>('Student', studentSchema);
+export const Student = model<TStudent>("Student", studentSchema);
