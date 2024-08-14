@@ -60,6 +60,16 @@ userSchema.post("save", function (doc, next) {
 });
 
 userSchema.statics.isUserExistsByCustomId = async function (id: string) {
+  console.log(id);
+  const user = await User.findOne({ id });
+  console.log(user);
+  return user;
+};
+
+userSchema.statics.isUserDeleted = async function (id: string) {
+  return await User.findOne({ id });
+};
+userSchema.statics.isUserBlocked = async function (id: string) {
   return await User.findOne({ id });
 };
 

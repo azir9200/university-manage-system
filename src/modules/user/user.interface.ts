@@ -12,6 +12,10 @@ export interface TUser {
 
 export interface UserModel extends Model<TUser> {
   isUserExistsByCustomId(id: string): Promise<TUser>;
+  //deleted
+  isUserDeleted(id: string): Promise<TUser>;
+  // blocked
+  isUserBlocked(id: string): Promise<TUser>;
   //instance methods for checking if passwords are matched
   isPasswordMatched(
     plainTextPassword: string,
