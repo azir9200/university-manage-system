@@ -2,11 +2,6 @@ import QueryBuilder from "../../app/builder/QueryBuilder";
 import { Student } from "./student.model";
 import { studentSearchableFields } from "./studentConstant";
 
-// const createStudentIntoDB = async (student: TStudent) => {
-//   const result = await Student.create(student);
-//   return result;
-// };
-
 const getAllStudentsFromDB = async (query: Record<string, unknown>) => {
   //    const result = await Student.find()
   //   .populate('admissionSemester')
@@ -21,6 +16,7 @@ const getAllStudentsFromDB = async (query: Record<string, unknown>) => {
   // };
   const studentQuery = new QueryBuilder(
     Student.find()
+      .populate("user")
       .populate("admissionSemester")
       .populate({
         path: "academicDepartment",

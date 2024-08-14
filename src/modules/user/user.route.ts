@@ -3,11 +3,14 @@ import { UserControllers } from "./user.controller";
 import validateRequest from "../../app/middlewares/validateRequest";
 import { createStudentValidationSchema } from "../student/studentValidation";
 import { createAdminValidationSchema } from "../Admin/validation.admin";
+import auth from "../../app/middlewares/auth";
+import { USER_ROLE } from "./user.constant";
 
 const router = express.Router();
 
 router.post(
   "/create-student",
+  auth(USER_ROLE.admin),
   validateRequest(createStudentValidationSchema),
   UserControllers.createStudent
 );
