@@ -3,6 +3,7 @@ import validateRequest from "../../app/middlewares/validateRequest";
 import { AcademicFacultyValidation } from "./validation.academicFaculty";
 import { AcademicFacultyControllers } from "./controller.academicFaculty";
 import auth from "../../app/middlewares/auth";
+import { USER_ROLE } from "../user/user.constant";
 
 const router = express.Router();
 
@@ -14,7 +15,11 @@ router.post(
   AcademicFacultyControllers.createAcademicFaculty
 );
 
-router.get("/", auth(), AcademicFacultyControllers.getAllAcademicFaculties);
+router.get(
+  "/",
+  auth(USER_ROLE.student),
+  AcademicFacultyControllers.getAllAcademicFaculties
+);
 
 router.get("/:facultyId", AcademicFacultyControllers.getSingleAcademicFaculty);
 

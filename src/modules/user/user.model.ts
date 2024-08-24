@@ -60,6 +60,7 @@ userSchema.post("save", function (doc, next) {
 });
 
 userSchema.statics.isUserExistsByCustomId = async function (id: string) {
+  //const user = await User.findOne({ id }).select("+password");
   const user = await User.findOne({ id }).select("+password");
   return user;
 };
@@ -84,7 +85,7 @@ userSchema.statics.isJWTIssuedBeforePasswordChanged = function (
 ) {
   console.log(
     passwordChangedTimestamp,
-    "passChag",
+    "passChange",
     jwtIssuedTimestamp,
     "issue"
   );

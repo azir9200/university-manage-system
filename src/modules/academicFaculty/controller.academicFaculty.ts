@@ -11,13 +11,14 @@ const createAcademicFaculty = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Academic faculty is created successfully",
+    message: "Academic faculty is created successfully  by Azir",
     data: result,
   });
 });
 
 const getAllAcademicFaculties = catchAsync(async (req, res) => {
-  console.log("text => ", req.user);
+  // console.log("text => ", req.user);
+  console.log(req.cookies, "cooookkkk");
   const result = await AcademicFacultyServices.getAllAcademicFacultiesFromDB();
 
   sendResponse(res, {

@@ -29,7 +29,7 @@ const createStudentIntoDB = async (password: string, studentData: TStudent) => {
   }
 
   userData.id = await generateStudentId(admissionSemester);
-  console.log(userData);
+  // console.log(userData);
   const newUser = await User.create(userData);
   if (Object.keys(newUser).length) {
     studentData.id = newUser.id; //embedded id

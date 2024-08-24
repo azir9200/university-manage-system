@@ -8,12 +8,13 @@ const router = express.Router();
 
 // router.post('/create-student', StudentControllers.createStudent);
 
-router.get("/", auth(), StudentControllers.getAllStudents);
+router.get("/", StudentControllers.getAllStudents);
 
 router.get("/:studentId", StudentControllers.getSingleStudent);
 
 router.patch(
   "/:studentId",
+  auth(),
   validateRequest(updateStudentValidationSchema),
   StudentControllers.updateStudent
 );

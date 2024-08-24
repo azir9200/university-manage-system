@@ -10,6 +10,7 @@ export interface TUser {
   status: "in-progress" | "blocked";
   isDeleted: boolean;
 }
+USER_ROLE;
 
 export interface UserModel extends Model<TUser> {
   isUserExistsByCustomId(id: string): Promise<TUser>;
@@ -24,7 +25,7 @@ export interface UserModel extends Model<TUser> {
   ): Promise<boolean>;
   isJWTIssuedBeforePasswordChanged(
     passwordChangedTimestamp: Date,
-    jwtIssuedTimestamp: number,
+    jwtIssuedTimestamp: number
   ): boolean;
 }
 

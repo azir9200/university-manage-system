@@ -5,7 +5,7 @@ import config from "../../config";
 import bcrypt from "bcrypt";
 import AppError from "../../app/errors/App.Error";
 import httpStatus from "http-status";
-import { createToken, verifyToken } from "./auth.utils";
+import { createToken, verifyToken,  } from "./auth.utils";
 
 const loginUser = async (payload: TLoginUser) => {
   const user = await User.isUserExistsByCustomId(payload.id);
@@ -65,7 +65,7 @@ const loginUser = async (payload: TLoginUser) => {
 
   return {
     accessToken,
-    refreshToken,
+     refreshToken,
     needsPasswordChanged: user?.needsPasswordChange,
   };
 };
@@ -168,5 +168,5 @@ const refreshToken = async (token: string) => {
 export const AuthServices = {
   loginUser,
   changePassword,
-  refreshToken,
+   refreshToken,
 };

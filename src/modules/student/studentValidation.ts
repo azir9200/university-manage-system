@@ -1,4 +1,4 @@
-import {  z } from 'zod';
+import { z } from "zod";
 // import { Guardian, LocalGuardian, Student, UserName } from './student.interface';
 
 export const userNameValidationSchema = z.object({
@@ -16,7 +16,7 @@ export const guardianValidationSchema = z.object({
   motherContactNo: z.string().min(1),
 });
 
- const localGuardianValidationSchema = z.object({
+const localGuardianValidationSchema = z.object({
   name: z.string().min(1),
   occupation: z.string().min(1),
   contactNo: z.string().min(1),
@@ -24,25 +24,27 @@ export const guardianValidationSchema = z.object({
 });
 
 export const createStudentValidationSchema = z.object({
-  body:z.object({  
+  body: z.object({
     password: z.string().max(20),
-   student: z.object({
-    name: userNameValidationSchema,
-    gender: z.enum(['male', 'female', 'others']),
-    dateOfBirth: z.string().optional(),
-    email: z.string().email(),
-    contactNo: z.string().min(1),
-    emergencyContactNo: z.string().min(1),
-    bloodGroup: z.enum(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']),
-    presentAddress: z.string().min(1),
-    permanentAddress: z.string().min(1),
-    guardian: guardianValidationSchema,
-    localGuardian: localGuardianValidationSchema,
-    admissionSemester: z.string(),
-    profileImg: z.string(),
-   }),    
+    student: z.object({
+      name: userNameValidationSchema,
+      gender: z.enum(["male", "female", "others"]),
+      dateOfBirth: z.string().optional(),
+      email: z.string().email(),
+      contactNo: z.string().min(1),
+      emergencyContactNo: z.string().min(1),
+      bloodGroup: z.enum(["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]),
+      presentAddress: z.string().min(1),
+      permanentAddress: z.string().min(1),
+      guardian: guardianValidationSchema,
+      localGuardian: localGuardianValidationSchema,
+      academicDepartment: z.string(),
+      admissionSemester: z.string(),
+      academicFaculties: z.string(),
+      profileImg: z.string(),
+    }),
   }),
-})
+});
 
 const updateUserNameValidationSchema = z.object({
   firstName: z.string().min(1).max(20).optional(),
@@ -70,13 +72,13 @@ export const updateStudentValidationSchema = z.object({
   body: z.object({
     student: z.object({
       name: updateUserNameValidationSchema,
-      gender: z.enum(['male', 'female', 'other']).optional(),
+      gender: z.enum(["male", "female", "other"]).optional(),
       dateOfBirth: z.string().optional(),
       email: z.string().email().optional(),
       contactNo: z.string().optional(),
       emergencyContactNo: z.string().optional(),
       bloodGroup: z
-        .enum(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'])
+        .enum(["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"])
         .optional(),
       presentAddress: z.string().optional(),
       permanentAddress: z.string().optional(),

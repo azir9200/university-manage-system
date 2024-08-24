@@ -2,9 +2,9 @@ import { object } from "zod";
 import app from "./app";
 import config from "./config";
 import mongoose from "mongoose";
-import { Server } from "http";
+// import { Server } from "http";
 
-let server: Server;
+// let server: Server;
 
 async function main() {
   try {
@@ -32,4 +32,4 @@ main();
 //   process.exit(1);
 // });
 
-console.log(object)
+console.log(object);
